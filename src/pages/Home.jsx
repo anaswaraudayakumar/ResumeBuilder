@@ -14,7 +14,7 @@ function Home() {
               Your skills, Your Story,
               Your Next - All in One
             </h3>
-            <Link to={'/steps'} className='btn text-light' style={{ backgroundColor: 'rgba(24,29,25)' }}>Make Your Resume</Link>
+            <Link to={'/steps'} className='btn text-light' style={{ backgroundColor: 'rgba(24,29,25)' }}>Make Your Resume With Ai</Link>
           </div>
           <div className="col-lg-4"></div>
 
