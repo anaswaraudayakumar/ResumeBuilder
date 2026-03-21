@@ -13,14 +13,17 @@ import Select from '@mui/material/Select';
 import jobTypes from '../assets/jobRole.json'
 import skillJSON from '../assets/jobSkills.json'
 import summaryJSON from '../assets/summaries.json'
+import { addResumeAPI } from '../services/allResumeApiservices';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const steps = ['Basic Information', 'Contact Details', 'Educational Details','Review & Submit'];
 
 function UserInput({resumeData,setResumeData}) {
+    const navigate =useNavigate()
     const [activeStep, setActiveStep] = React.useState(0);
-    console.log(resumeData);
+    //console.log(resumeData);
     
    
 
@@ -104,7 +107,22 @@ function UserInput({resumeData,setResumeData}) {
             default : return null
         }
     }
-
+   
+    const handleAddResume =async ()=>{
+        const {fullName,location,job,email,phone,linkedin,github,degree,uni,passOut,skills,summery} =resumeData
+        if(fullName&& location && job && email && phone && linkedin && github && degree && uni && passOut && skills.length>0 && summery){
+                const response =await addResumeAPI(resumeData)
+                console.log(response);
+                if(response.status==201){
+                    alert("resume Added Succesfully")
+                    const resumeId = response.data.id
+                    //navigate to view resume
+                    navigate(`/resume/${resumeId}/view`)
+                }      
+        }else{
+            alert('please fill the form completely !!!')
+        }
+    }
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -127,7 +145,7 @@ function UserInput({resumeData,setResumeData}) {
                     </Typography>
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                         <Box sx={{ flex: '1 1 auto' }} />
-                        <Button>Finish</Button>
+                        <Button onClick={handleAddResume}>Finish</Button>
                     </Box>
                 </React.Fragment>
             ) : (

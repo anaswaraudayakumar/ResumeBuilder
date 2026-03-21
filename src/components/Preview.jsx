@@ -17,10 +17,9 @@ function Preview({resumeData}) {
         <h4 className='mt-3'>Technical Skills</h4>
         {
           
-          resumeData?.skills?.map((item,index)=>{
-                <><Button key={index} className='text-dark' variant="text">{item}</Button>{index< 
-                  resumeData?.skills.length  && ','}</>
-          })
+          resumeData?.skills?.map((item,index)=>(
+            <Button key={index} variant ="outlined" className='text-dark m-1 border-dark'>{item}</Button>
+          ))
         }
         {/* dupicate according to user skills  */}
         
